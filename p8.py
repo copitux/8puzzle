@@ -17,7 +17,7 @@ if __name__ == '__main__':
     closed = set()
 
     # up down left right
-    opened.add(initial.to_string())
+    opened.add(initial)
     print 'Initial: {0}'.format(initial.to_string())
     print 'Goal   : {0}'.format(goal.to_string())
     raw_input('continua...')
@@ -25,8 +25,8 @@ if __name__ == '__main__':
     while opened != set():
         i += 1
         print 'Iteracion: %d' % i
-        node_to_expand = Node(opened.pop())
-        closed.add(node_to_expand.to_string())
+        node_to_expand = opened.pop()
+        closed.add(node_to_expand)
         succ = []
         if node_to_expand.matrix == goal.matrix:
             print 'goal'
@@ -40,13 +40,13 @@ if __name__ == '__main__':
         left.left()
         right = Node(snode_to_expand)
         right.right()
-        if up.to_string() not in closed:
-            opened.add(up.to_string())
-        if down.to_string() not in closed:
-            opened.add(down.to_string())
-        if left.to_string() not in closed:
-            opened.add(left.to_string())
-        if right.to_string() not in closed:
-            opened.add(right.to_string())
+        if up not in closed:
+            opened.add(up)
+        if down not in closed:
+            opened.add(down)
+        if left not in closed:
+            opened.add(left)
+        if right not in closed:
+            opened.add(right)
         #import ipdb; ipdb.set_trace()
         print len(opened)

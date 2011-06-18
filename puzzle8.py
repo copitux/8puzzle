@@ -27,6 +27,10 @@ class Node(object):
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    def __hash__(self):
+        a = self.to_string()
+        return int(a)
+
     def shuffle(self, matrix):
         matrix = list(matrix)
         randmatrix = []
