@@ -17,9 +17,12 @@ class Node(object):
             if i == 2 or i == 5:
                 to_print += '\n'
         return to_print
+    def __str__(self):
+        return str(self.__repr__)
 
     def __eq__(self, other):
-        return self.matrix == other.matrix
+        if isinstance(other, Node):
+            return self.matrix == other.matrix
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -44,7 +47,7 @@ class Node(object):
             self.matrix[z], self.matrix[z-3] = self.matrix[z-3], self.matrix[z]
             self.zero = z-3
         else:
-            print "can't up"
+            return False
 
     def down(self):
         z = self.zero_posit()
@@ -52,7 +55,7 @@ class Node(object):
             self.matrix[z], self.matrix[z+3] = self.matrix[z+3], self.matrix[z]
             self.zero = z+3
         else:
-            print "can't down"
+            return False
 
     def left(self):
         z = self.zero_posit()
@@ -60,7 +63,7 @@ class Node(object):
             self.matrix[z], self.matrix[z-1] = self.matrix[z-1], self.matrix[z]
             self.zero = z-1
         else:
-            print "can't left"
+            return False
 
     def right(self):
         z = self.zero_posit()
@@ -68,4 +71,7 @@ class Node(object):
             self.matrix[z], self.matrix[z+1] = self.matrix[z+1], self.matrix[z]
             self.zero = z+1
         else:
-            print "can't right"
+            return False
+
+    def to_string(self):
+        return ''.join(map(str, self.matrix))
