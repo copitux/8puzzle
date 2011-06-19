@@ -1,45 +1,31 @@
 #!/usr/bin/env python
 
 from puzzle8 import Node
-from copy import copy
 
 if __name__ == '__main__':
 
-    #bragas
     goal = Node('123804765')
-    #goal = Node('123456780')
-    #goal = Node()
-
-    #bragas
+    #TODO: Check parity errors
     initial = Node('217860345')
-    #initial = Node('123746058')
-    opened = set()
+    opened = set([initial])
     closed = set()
+    counter = 0
+    result = 'Goal not found'
 
-    # up down left right
-    opened.add(initial)
     print 'Initial: {0}'.format(initial.to_string())
     print 'Goal   : {0}'.format(goal.to_string())
-    raw_input('continua...')
-    i = 1
+    raw_input('Continue...')
+
     while opened != set():
-        i += 1
-        print 'Iteracion: %d' % i
+        counter += 1
+        print 'Counter: {0} - Open Nodes: {1}'.format(counter, len(opened))
         node_to_expand = opened.pop()
         closed.add(node_to_expand)
         succ = []
         if node_to_expand.matrix == goal.matrix:
-            print 'goal'
+            result = result.replace('not ', '') #:P
             break;
-        snode_to_expand = node_to_expand.to_string()
-        up = Node(snode_to_expand)
-        up.up()
-        down = Node(snode_to_expand)
-        down.down()
-        left = Node(snode_to_expand)
-        left.left()
-        right = Node(snode_to_expand)
-        right.right()
+        up, down, left, right = node_to_expand.expand()
         if up not in closed:
             opened.add(up)
         if down not in closed:
@@ -48,5 +34,5 @@ if __name__ == '__main__':
             opened.add(left)
         if right not in closed:
             opened.add(right)
-        #import ipdb; ipdb.set_trace()
-        print len(opened)
+
+    print result
