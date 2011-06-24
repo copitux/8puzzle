@@ -12,11 +12,12 @@ class Node(object):
         | 6 | 7 | 8 |
 
     """
-    def __init__(self, matrix=None):
+    def __init__(self, matrix=None, depth=0):
         if not matrix:
             self.matrix = self.shuffle('012345678')
         else:
             self.matrix = map(int,list(matrix))
+        self.depth = depth
 
     def __str__(self):
         to_print = ''
@@ -58,10 +59,11 @@ class Node(object):
         TODO: not DRY!, maybe copy learn
         """
         initial_string = self.to_string()
-        node_up = Node(initial_string)
-        node_down = Node(initial_string)
-        node_left = Node(initial_string)
-        node_right = Node(initial_string)
+        depth = self.depth + 1
+        node_up = Node(initial_string, depth)
+        node_down = Node(initial_string, depth)
+        node_left = Node(initial_string, depth)
+        node_right = Node(initial_string, depth)
         return node_up.up(), node_down.down(), node_left.left(), node_right.right()
 
     def up(self):

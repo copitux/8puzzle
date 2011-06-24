@@ -26,7 +26,8 @@ if __name__ == '__main__':
         succ = []
         if node_to_expand.matrix == goal.matrix:
             time_end = time()
-            result = 'Goal found in {0:.2f} seconds'.format(time_end - time_init)
+            result = 'Goal found in {0:.2f} seconds. Depth: {1}'.format(
+                    time_end - time_init, node_to_expand.depth)
             break;
         up, down, left, right = node_to_expand.expand()
         if up not in closed:
