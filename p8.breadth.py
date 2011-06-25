@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from puzzle8 import Node
+from node import Node
 from time import time
 
 if __name__ == '__main__':
@@ -29,14 +29,9 @@ if __name__ == '__main__':
             result = 'Goal found in {0:.2f} seconds. Depth: {1}'.format(
                     time_end - time_init, node_to_expand.depth)
             break;
-        up, down, left, right = node_to_expand.expand()
-        if up not in closed:
-            opened.add(up)
-        if down not in closed:
-            opened.add(down)
-        if left not in closed:
-            opened.add(left)
-        if right not in closed:
-            opened.add(right)
+        succs = node_to_expand.expand()
+        for node in succs:
+            if node not in closed:
+                opened.add(node)
 
     print result
