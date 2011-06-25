@@ -24,7 +24,7 @@ if __name__ == '__main__':
         node_to_expand = opened.pop()
         closed.add(node_to_expand)
         succ = []
-        if node_to_expand.matrix == goal.matrix:
+        if node_to_expand == goal:
             time_end = time()
             result = 'Goal found in {0:.2f} seconds. Depth: {1}'.format(
                     time_end - time_init, node_to_expand.depth)
