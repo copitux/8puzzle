@@ -31,7 +31,6 @@ class Node(object):
 
     def __eq__(self, other):
         if isinstance(other, Node):
-            import ipdb; ipdb.set_trace()
             return self.matrix == other.matrix
 
     def __ne__(self, other):
