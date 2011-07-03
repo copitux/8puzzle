@@ -2,6 +2,7 @@
 
 from astarnode import AstarNode
 from node import Node
+from time import time
 
 if __name__ == '__main__':
 
@@ -14,6 +15,7 @@ if __name__ == '__main__':
     print 'Initial: {0}'.format(initial.to_string())
     print 'Goal   : {0}'.format(goal.to_string())
     raw_input('Continue...')
+    time_init = time()
 
     while opened != set():
         counter += 1
@@ -24,7 +26,8 @@ if __name__ == '__main__':
         closed.append(node_to_expand)
 
         if node_to_expand == goal:
-            print 'goal'
+            print 'Goal found in {0:.2f} seconds in depth {1}'.format(time() - time_init, \
+            node_to_expand.depth)
             break;
 
         succs = node_to_expand.expand()
