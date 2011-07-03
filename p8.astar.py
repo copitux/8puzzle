@@ -14,6 +14,9 @@ if __name__ == '__main__':
     counter = 0
     print 'Initial: {0}'.format(initial.to_string())
     print 'Goal   : {0}'.format(goal.to_string())
+    if initial.parity_error():
+        print 'Parity error: have not solution' 
+
     raw_input('Continue...')
     time_init = time()
 

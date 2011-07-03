@@ -6,8 +6,7 @@ from time import time
 if __name__ == '__main__':
 
     goal = Node('123804765')
-    #TODO: Check parity errors
-    initial = Node('127860345')
+    initial = Node('217860345')
     opened = set([initial])
     closed = set()
     counter = 0
@@ -15,6 +14,9 @@ if __name__ == '__main__':
 
     print 'Initial: {0}'.format(initial.to_string())
     print 'Goal   : {0}'.format(goal.to_string())
+    if initial.parity_error(goal):
+        print 'Parity error: have not solution' 
+        
     raw_input('Continue...')
     time_init = time()
 
