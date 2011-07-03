@@ -7,8 +7,7 @@ if __name__ == '__main__':
 
     goal = Node('123804765')
     
-    initial = AstarNode('217860345',goal=goal)
-    #ginitial = AstarNode('123804765', goal=goal)
+    initial = AstarNode('127860345',goal=goal)
     opened = [initial]
     closed = []
     counter = 0
@@ -20,7 +19,6 @@ if __name__ == '__main__':
         counter += 1
         print 'Counter: {counter} - Opened: {o} - Closed: {c}'.format(counter=counter, \
                 o=len(opened), c=len(closed))
-        #order opened
         opened.sort(key=lambda(node): node.f())
         node_to_expand = opened.pop(0)
         closed.append(node_to_expand)
@@ -32,7 +30,6 @@ if __name__ == '__main__':
         succs = node_to_expand.expand()
         for qone in succs:
             if qone not in opened and qone not in closed:
-                print 'insert because succ node no esta en las listas'
                 opened.append(qone)
             else:
                 flag_opened = True
@@ -50,5 +47,4 @@ if __name__ == '__main__':
                     else:
                         closed.pop(qzero_index)
                     opened.append(qone)
-
 
