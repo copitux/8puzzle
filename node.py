@@ -52,18 +52,15 @@ class Node(object):
         return self.matrix.index(0)
     
     def expand(self):
-        """ 
-        Order import 
-
-        TODO: not DRY!, maybe copy learn
-        """
+        
         initial_string = self.to_string()
         depth = self.depth + 1
-        node_up = Node(initial_string, depth)
-        node_down = Node(initial_string, depth)
         node_left = Node(initial_string, depth)
+        node_up = Node(initial_string, depth)
         node_right = Node(initial_string, depth)
-        return node_up.up(), node_down.down(), node_left.left(), node_right.right()
+        node_down = Node(initial_string, depth)
+       
+	return node_left.left(), node_up.up(), node_right.right(), node_down.down()
 
     def up(self):
         z = self.zero_index()
