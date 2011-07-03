@@ -7,12 +7,17 @@ class AstarNode(Node):
         self.goal = goal
         self.parent = parent
         self.g = self.calcg()
+        self.h = self.h()
     
     def calcg(self):
+        #if self.parent is None:
+        #    return self.heuristic_desorder()
+        #else:
+        #    return self.parent.g + self.heuristic_desorder()
         if self.parent is None:
-            return self.heuristic_desorder()
+            return 0
         else:
-            return self.parent.g + self.heuristic_desorder()
+            return self.parent.g + 1
 
     def heuristic_desorder(self):
         goal = self.goal.matrix
@@ -29,22 +34,24 @@ class AstarNode(Node):
         indexrange = range(len(matrix))
         manhattan = 0
         for num in matrix:
-            pos_matrix = matrix.index(num)
-            y_matrix, x_matrix = divmod(pos_matrix, 3)
-            pos_goal = goal.index(num)
-            y_goal, x_goal = divmod(pos_goal, 3)
-            manhattan += abs(x_matrix - x_goal) + abs(y_matrix - y_goal)
+            if num != 0:
+                pos_matrix = matrix.index(num)
+                y_matrix, x_matrix = divmod(pos_matrix, 3)
+                pos_goal = goal.index(num)
+                y_goal, x_goal = divmod(pos_goal, 3)
+                manhattan += abs(x_matrix - x_goal) + abs(y_matrix - y_goal)
 
         return manhattan
 
     def f(self):
-        return self.g + self.h()
+        return self.g + self.h
 
     def expand(self):
-        initial_string = self.to_string()
+        nodes = super(AstarNode, self).expand()
         depth = self.depth + 1
-        node_up = AstarNode(initial_string, goal=self.goal, parent=self, depth=depth)
-        node_down = AstarNode(initial_string, goal=self.goal, parent=self, depth=depth)
-        node_left = AstarNode(initial_string, goal=self.goal, parent=self, depth=depth)
-        node_right = AstarNode(initial_string, goal=self.goal, parent=self, depth=depth)
-        return node_up.up(), node_down.down(), node_left.left(), node_right.right()
+        node_left = AstarNode(nodes[0].to_string(), goal=self.goal, parent=self, depth=depth)
+        node_up = AstarNode(nodes[1].to_string(), goal=self.goal, parent=self, depth=depth)
+        node_right = AstarNode(nodes[2].to_string(), goal=self.goal, parent=self, depth=depth)
+        node_down = AstarNode(nodes[3].to_string(), goal=self.goal, parent=self, depth=depth)
+
+        return node_left, node_up, node_right, node_down
