@@ -10,10 +10,6 @@ class AstarNode(Node):
         self.h = self.h()
     
     def calcg(self):
-        #if self.parent is None:
-        #    return self.heuristic_desorder()
-        #else:
-        #    return self.parent.g + self.heuristic_desorder()
         if self.parent is None:
             return 0
         else:
@@ -22,16 +18,14 @@ class AstarNode(Node):
     def heuristic_desorder(self):
         goal = self.goal.matrix
         matrix, not_in_place = self.matrix, []
-        indexgoal = range(len(goal))
-        for i in indexgoal:
-            if goal[i] != matrix[i] and matrix[i] != 0:
+        for i, v in enumerate(goal):
+            if v != matrix[i] and matrix[i] != 0:
                 not_in_place.append(matrix[i])
 
         return len(not_in_place)      
 
     def h(self):
         matrix, goal = self.matrix, self.goal.matrix
-        indexrange = range(len(matrix))
         manhattan = 0
         for num in matrix:
             if num != 0:

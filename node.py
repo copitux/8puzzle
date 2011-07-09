@@ -20,8 +20,8 @@ class Node(object):
 
     def __str__(self):
         to_print = ''
-        for i in range(len(self.matrix)):
-            to_print += '{0:^3}|'.format(self.matrix[i])
+        for i, v in enumerate(self.matrix):
+            to_print += '{0:^3}|'.format(v)
             if i == 2 or i == 5:
                 to_print += '\n'
         return to_print
@@ -100,6 +100,6 @@ class Node(object):
         for i in range(1,9):
             slicing_init = set(initial[initial.index(i)+1:])
             slicing_goal = set(goal[0:goal.index(i)])
-            inversions += len(slicing_init&slicing_goal)
+            inversions += len(slicing_init & slicing_goal)
 
         return True if (inversions % 2) != 0 else False
